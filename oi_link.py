@@ -1,11 +1,11 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.6
 
 from configparser import ConfigParser
 from functools import wraps
 from json import dumps as to_json, loads as from_json
 from os.path import realpath, dirname, join
 from random import choices
-from string import ascii_letters
+from string import ascii_letters, ascii_lowercase
 from sys import exit
 
 from flask import abort, Flask, request, redirect, render_template_string, session, url_for
@@ -48,9 +48,11 @@ except Exception as e:
 
 def generate_link():
     global oi_links
-    link = "".join(choices(ascii_letters, k=3))
+    # link = "".join(choices(ascii_letters, k=3))
+    link = "".join(choices(ascii_lowercase, k=2))
     while link in oi_links:
-        link = "".join(choices(ascii_letters, k=3))
+        # link = "".join(choices(ascii_letters, k=3))
+        link = "".join(choices(ascii_lowercase, k=2))
     oi_links[link] = None
     return link
 
